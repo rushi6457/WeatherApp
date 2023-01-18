@@ -39,7 +39,7 @@ const Cards = ({data}:any):JSX.Element =>{
     
     return (
 
-<SimpleGrid  spacing={4} ml={'35%'} templateColumns='repeat(2, 200px)' >
+<SimpleGrid  spacing={4} ml={'3%'} templateColumns='repeat(2, 200px)' >
   <Card>
     <CardHeader>
       <Heading size='md'> Min. Temperature</Heading>

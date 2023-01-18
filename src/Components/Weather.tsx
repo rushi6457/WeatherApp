@@ -6,6 +6,10 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Forcast from "./Forcast";
 import Cards from "./Cards";
+import Search from "./Search";
+import "./Weather.css"
+import dotenv from "dotenv"
+console.log(process.env);
 
 interface WeatherProps{
     data:WeatherData
@@ -75,8 +79,9 @@ useEffect(()=>{
   
   
     return (
-        <Box>
-              <Heading>Weather Forecast</Heading>
+        <Box className="styles">
+            
+            <Search data = {data} handleChange = {handleChange}/>
             <Forcast data={data} />
             <Cards data = {data}/>
         </Box>
