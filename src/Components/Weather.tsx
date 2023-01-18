@@ -7,9 +7,7 @@ import { useDispatch } from "react-redux";
 import Forcast from "./Forcast";
 import Cards from "./Cards";
 import Search from "./Search";
-import "./Weather.css"
-import dotenv from "dotenv"
-console.log(process.env);
+require("dotenv").config()
 
 interface WeatherProps{
     data:WeatherData
@@ -64,7 +62,7 @@ getLocation()
 
 useEffect(()=>{
 
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f9e3ee87c2765b677ab21d53d1138a56`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.API_KEY}`)
     .then((res)=>res.json())
     .then((res)=>setData(res))
 },[])
