@@ -48,7 +48,7 @@ const Cards = ({data}:any):JSX.Element =>{
      {/* <Degree temp = {Math.round(data.main.temp_min)} /> */}
     </CardBody>
     <CardFooter>
-    {data.temp >=25 ? <img width={'70px'} src={sunny} alt="" /> : <img width={'70px'}  src={sun} alt="" /> }
+    {/* {data.temp >=25 ? <img width={'70px'} src={sunny} alt="" /> : <img width={'70px'}  src={sun} alt="" /> } */}
     </CardFooter>
   </Card>
   <Card>
@@ -59,7 +59,7 @@ const Cards = ({data}:any):JSX.Element =>{
        {/* <MaxDegree temp = {Math.round(data.main.temp_max)} /> */}
     </CardBody>
     <CardFooter>
-        {data.temp >=25 ? <img width={'70px'} src={sunny} alt="" /> : <img width={'70px'}  src={sun} alt="" /> }
+        {/* {data.temp >=25 ? <img width={'70px'} src={sunny} alt="" /> : <img width={'70px'}  src={sun} alt="" /> } */}
     </CardFooter>
   </Card>
   {/* <Card>

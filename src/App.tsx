@@ -8,8 +8,8 @@ function App() {
   return (
     <div className="App">
         <Flex justifyContent={'center'} gap='10px'>
-          <Text fontSize={'30px'}>Weather</Text>
-          <Heading>Forecast</Heading>
+          <Text color={'white'} fontSize={'30px'}>Weather</Text>
+          <Heading color={'white'}>Forecast</Heading>
         </Flex>
        
         <Weather/>

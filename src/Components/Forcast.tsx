@@ -17,10 +17,10 @@ const Forcast = ({data}:any) =>{
         <div>
             
             <Flex justifyContent={'center'} marginLeft={'-22%'}  textAlign={'center'} >
-           <Heading as='h2' size={'lg'}>{data.name}</Heading> 
-            <Text fontSize={'20px'} bgColor={'red'} w={'35px'} borderRadius={'50%'}>{data.sys.country}</Text>  
+           {/* <Heading as='h2' size={'lg'}>{data.name}</Heading>  */}
+            {/* <Text fontSize={'20px'} bgColor={'red'} w={'35px'} borderRadius={'50%'}>{data.sys.country}</Text>   */}
            </Flex>
-            <Degree temp = {Math.round(data.main.temp)}/>
+            {/* <Degree temp = {Math.round(data.main.temp)}/> */}
         </div> 
     )
 }
