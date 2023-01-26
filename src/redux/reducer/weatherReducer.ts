@@ -14,7 +14,8 @@ const weatherReducer = (state =initState,action:WeatherAction) =>{
             return {
                 ...state,
                 loading:false,
-                error:''
+                error:'',
+                data:action.payload
             }
         }
         case SET_LOADING:{

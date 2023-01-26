@@ -1,15 +1,21 @@
-import { Box, Button, Card, CardBody, CardFooter, CardHeader, Container, Flex, Heading, Image, Input, Text, position } from "@chakra-ui/react"
+import { Box, Button, Card, CardBody, CardFooter, CardHeader, Container, Flex, Heading, Image, Input, Text, position,  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure, } from "@chakra-ui/react"
 import { getWeather } from "../redux/actions/weatherActions";
 import { useEffect, useState } from "react";
 import { WeatherData } from "../redux/Types/types";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import Forcast from "./Forcast";
-import Cards from "./Cards";
 import Search from "./Search";
 // require("dotenv").config()
 import sunny from "./assets/sunny.png"
-import sun from "./assets/sun.png"
+import sun from "./assets/sun.png";
+import "./Weather.css"
 interface WeatherProps{
     data:WeatherData
 }
@@ -43,7 +49,6 @@ const GetDay = ({day}:any):any =>{
 }
 
     let Degree = ({temp} :any):JSX.Element =>{
-        // console.log(typeof temp);
         
       return (
           <Heading size='md' fontSize={'25px'} mt={'4'}>
@@ -54,8 +59,9 @@ const GetDay = ({day}:any):any =>{
 
 const Weather= ():JSX.Element =>{
 
-   
-    const [city,setCity] = useState<string | any>('')
+ 
+    const [ city,setCity] = useState<string | any>('')
+    const [cityData,setCityData] = useState([])
     const [query,setQuery] = useState<string>('')
     const dispatch = useDispatch()
     const [data,setData] = useState<any>([])
@@ -68,47 +74,22 @@ const Weather= ():JSX.Element =>{
     }
 }
 getLocation()
-//https://api.openweathermap.org/data/2.5/weather?q=chalisgaon&appid=f9e3ee87c2765b677ab21d53d1138a56
 
-//https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=f9e3ee87c2765b677ab21d53d1138a56
 async function showPosition(position:any) {
        
         
     let res = await fetch(` https://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&daily&cnt=5&appid=f9e3ee87c2765b677ab21d53d1138a56`)
   
     let data = await res.json()
-    // return data
+   
     setData(data.list)
     
 }
 
-// console.log(data);
-
-
-
-// useEffect(()=>{
-
-//     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f9e3ee87c2765b677ab21d53d1138a56`)
-//     .then((res)=>res.json())
-//     .then((res)=>setData(res))
-// },[])
-
-//   const handleChange: React.ChangeEventHandler<HTMLInputElement> | undefined = (e:any) =>{
-    
-    //     const {name,value} = e.target;
-    //     setCity({...city,[name]:value})
-      
-    //   }
-    
-    
-    // console.log(data);
-
-
     return (
 
          <div>
-                {/* <Heading>{days[day]}</Heading> */}
-            <Flex justifyContent={'space-evenly'} alignItems={'center'} height={'70vh'}>
+            <Flex className="flex" justifyContent={'space-evenly'} alignItems={'center'} height={'70vh'}>
                   {
                 data.map((el:any)=>{
                     return(
@@ -123,100 +104,18 @@ async function showPosition(position:any) {
                                     <Heading size='md' fontSize={'1rem'}>{`Description: ${el.weather[0].main}`}</Heading>
                                     </CardBody>
                             </Card>
+                           
                         </div>
                     )
                 })
             }
             </Flex>
+
+             <Search/>
          </div>
-        // <Box className="styles">
-
-            /* <Search data = {data} handleChange = {handleChange}/> */
-           /* <Forcast data={data} />
-            <Cards data = {data}/> */
-
-            
-        /* </Box> */
+       
     )
 }
 
 export default Weather
 
-/*
-clouds
-: 
-{all: 51}
-dt
-: 
-1674680400
-dt_txt
-: 
-"2023-01-25 21:00:00"
-main
-: 
-feels_like
-: 
-294.9
-grnd_level
-: 
-987
-humidity
-: 
-43
-pressure
-: 
-1013
-sea_level
-: 
-1013
-temp
-: 
-295.49
-temp_kf
-: 
-0.81
-temp_max
-: 
-295.49
-temp_min
-: 
-294.68
-[[Prototype]]
-: 
-Object
-pop
-: 
-0.2
-rain
-: 
-3h
-: 
-0.21
-[[Prototype]]
-: 
-Object
-sys
-: 
-{pod: 'n'}
-visibility
-: 
-10000
-weather
-: 
-Array(1)
-0
-: 
-description
-: 
-"light rain"
-icon
-: 
-"10n"
-id
-: 
-500
-main
-: 
-"Rain"
-
-*/
