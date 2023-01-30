@@ -15,35 +15,38 @@ import { WeatherData } from "../redux/Types/types";
 import { getWeather } from "../redux/actions/weatherActions";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "../redux/store";
+import { log } from "console";
 
-interface WeatherProps{
-    data:WeatherData
-}
-interface mapData{
-    name:string
-}
-interface Position {
-    coords: Coordinates;
-}
+// interface WeatherProps{
+//     data:WeatherData
+// }
+// interface mapData{
+//     name:any
+// }
+// interface Position {
+//     coords: Coordinates;
+// }
 
-interface Coordinates {
-    latitude: number;
-    longitude: number;
-}
+// interface Coordinates {
+//     latitude: number;
+//     longitude: number;
+// }
 
-declare var navigator: Navigator;
+// declare var navigator: Navigator;
 
-interface Navigator {
-    geolocation: Geolocation;
-}
+// interface Navigator {
+//     geolocation: Geolocation;
+// }
+
+
 
 const Search = () =>{
       const { isOpen, onOpen, onClose } = useDisclosure()
-    const [ city,setCity] = useState<string | any>('')
-    const [cityData,setCityData] = useState([])
+    const [ city,setCity] = useState<any>('')
+    const [cityData,setCityData] = useState<any>([])
     const dispatch = useDispatch<any>()
-    const store:any = useSelector<any>(store=>store.weather.data)
-        // console.log(store);
+    const store:any = useSelector<any>(store=>store.weather)
+     
         
 const handleChange: React.ChangeEventHandler<HTMLInputElement> | undefined = (e:any) =>{
     
@@ -51,20 +54,27 @@ const handleChange: React.ChangeEventHandler<HTMLInputElement> | undefined = (e:
     setCity({...city,[name]:value})
     
 }
- 
-  useEffect(()=>{
-},[])
-
-const submitCity =() =>{
+const getCityData =async ({city}:any) =>{
+    //  console.log(city);
+       
+    let res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f9e3ee87c2765b677ab21d53d1138a56`)
+    let data = await res.json()
+    setCityData(data)
     
-    dispatch(getWeather(city))
-        
-    }
+}
+
+useEffect(()=>{
+      getCityData(city) 
+},[city,cityData])
+    const submitCity =() =>{ 
+ 
+}
+    //  console.log(cityData);
       
     return(
        <div>
         <form action="" onKeyDown={submitCity}>
-        <Button onClick={onOpen}  variant={'solid'} colorScheme={'green'} width='20%'>SEARCH WEATHER</Button>
+        <Button onClick={onOpen}  variant={'solid'} colorScheme={'red'} width='20%'>SEARCH WEATHER</Button>
 
              <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -72,20 +82,28 @@ const submitCity =() =>{
           <ModalHeader>Search City</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-          <Input name='city' onChange={handleChange}></Input>
        
-                <Flex mt='2%' justifyContent={'center'}><Heading textAlign={'center'}>{store.name}</Heading>
-                    <Text fontSize={'20px'} textAlign={'center'}>{store.sys.country}</Text>
+              <Input name='city' onChange={handleChange}></Input>
+        {cityData ? 
+            <div>
+                <Flex mt='2%' justifyContent={'center'}>
+                    <Heading textAlign={'center'}>{cityData.name}</Heading> 
+                    <Text fontSize={'20px'} textAlign={'center'}>{cityData?.sys?.country}</Text> 
                 </Flex>
                 <Flex justifyContent={'space-between'} alignItems={'center'}>
-                    <Flex>
-                        <Flex alignItems={'center'} fontSize={'25px'} fontWeight={'800'}><Text textAlign={'center'}>{Math.round(store.main.temp-273)}</Text><sup>o</sup></Flex>
-                        <Image width={'50px'} src ={store.weather.main =="Clouds" ? sunny : sun }></Image>
-                    </Flex> 
+                        <Flex>
+                                 <Flex alignItems={'center'} fontSize={'25px'} fontWeight={'800'}>
+                                    <Text textAlign={'center'}>{Math.round(cityData?.main?.temp-273)}</Text><sup>o</sup></Flex>     
+                                  {(cityData?.main?.temp-273) > 25 ? <img width={'70px'} src={sunny} alt="" /> : <img width={'70px'}  src={sun} alt="" /> }
+                        </Flex>
                          <Box>
-                            <Text fontSize={'20px'}>{`Weather: ${store.weather[0].main}`}</Text>
-                        </Box>
+                                <Text fontSize={'20px'}>{`Weather: ${cityData?.wind?.speed}m/s`}</Text>
+                    </Box>
                 </Flex>
+                </div>
+      
+                : null}
+             
           </ModalBody>
            
         </ModalContent>

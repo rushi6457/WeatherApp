@@ -85,15 +85,16 @@ async function showPosition(position:any) {
     setData(data.list)
     
 }
+// console.log(data);
 
     return (
 
          <div>
-            <Flex className="flex" justifyContent={'space-evenly'} alignItems={'center'} height={'70vh'}>
+            <Flex className="flex" justifyContent={'space-evenly'} alignItems={'center'} height={'60vh'}>
                   {
                 data.map((el:any)=>{
                     return(
-                        <div style={{border:'1px solid',padding:'20px',margin:'10px',backgroundColor: 'rgb(180, 230, 250)',borderRadius:'3%' }}>
+                        <div key={el.weather.id} style={{padding:'20px',margin:'10px',backgroundColor: 'rgb(180, 230, 250)',borderRadius:'3%' }}>
                           <Heading size='md' fontSize={'1.5rem'} as='h4'><GetDay day={el.dt_txt}/></Heading>
                             <Degree temp ={Math.floor(el.main.temp)}/>
                               <Card mt='10%' width={'100%'}>

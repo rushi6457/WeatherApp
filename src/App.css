@@ -1,14 +1,18 @@
+body{
+  background-color: black;
+}
 .App {
   text-align: center;
   /* border: 1px solid; */
   margin: auto;
-  height: 90vh;
+  height: 80vh;
   width: 100%;
-  margin-top: 2%;
+  margin-top: 5%;
   padding: 1%;
  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-  background-color: rgb(128, 0, 0);
+  /* background-color: rgb(128, 0, 0); */
   border-radius: 5%;
+  background-image: url('http://panoviewimaging.com/tumblr/clouds3_1024.gif');
 }
 
 
