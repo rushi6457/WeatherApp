@@ -1,3 +1,5 @@
+
+
 import { Box, Button, Card, CardBody, CardFooter, CardHeader, Container, Flex, Heading, Image, Input, Text, position,  Modal,
   ModalOverlay,
   ModalContent,
@@ -12,7 +14,6 @@ import { WeatherData } from "../redux/Types/types";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Search from "./Search";
-// require("dotenv").config()
 import sunny from "./assets/sunny.png"
 import sun from "./assets/sun.png";
 import "./Weather.css"

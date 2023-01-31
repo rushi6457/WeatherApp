@@ -17,29 +17,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { store } from "../redux/store";
 import { log } from "console";
 
-// interface WeatherProps{
-//     data:WeatherData
-// }
-// interface mapData{
-//     name:any
-// }
-// interface Position {
-//     coords: Coordinates;
-// }
-
-// interface Coordinates {
-//     latitude: number;
-//     longitude: number;
-// }
-
-// declare var navigator: Navigator;
-
-// interface Navigator {
-//     geolocation: Geolocation;
-// }
-
-
-
 const Search = () =>{
       const { isOpen, onOpen, onClose } = useDisclosure()
     const [ city,setCity] = useState<any>('')
@@ -97,7 +74,7 @@ useEffect(()=>{
                                   {(cityData?.main?.temp-273) > 25 ? <img width={'70px'} src={sunny} alt="" /> : <img width={'70px'}  src={sun} alt="" /> }
                         </Flex>
                          <Box>
-                                <Text fontSize={'20px'}>{`Weather: ${cityData?.wind?.speed}m/s`}</Text>
+                                <Text fontSize={'20px'}>{`Wind speed: ${cityData?.wind?.speed}m/s`}</Text>
                     </Box>
                 </Flex>
                 </div>
